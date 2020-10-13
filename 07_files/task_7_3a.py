@@ -24,3 +24,15 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+with open('/home/std/web-2020-2/07_files/CAM_table.txt', 'r') as CAM:
+    lists = []
+    for line in CAM:
+        if line.count('.') == 2:
+            a = line.split()
+            b = a.pop(2)
+            lists.append(a)
+    lists.sort()
+    for l in lists:
+        print(l[0] + '    ' + l[1] + '   ' + l[2])
+
+# int первый эл

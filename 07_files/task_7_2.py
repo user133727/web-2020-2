@@ -14,8 +14,8 @@
 """
 
 from sys import argv
-file = argv[:1]
-with open('/home/std/pyneng-examples-exercises/exercises/07_files/config_sw1.txt', 'r') as file:
+file = argv[1]
+with open(file, 'r') as file:
     for line in file:
         if line.find('!') == -1:
-            print(line.strip('\n'))
+            print(line)

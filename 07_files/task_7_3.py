@@ -17,3 +17,11 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+
+with open('/home/std/web-2020-2/07_files/CAM_table.txt', 'r') as CAM:
+    for line in CAM:
+        if line.count('.') == 2:
+            a = line.split()
+            b = a.pop(2)
+            print(a[0] + '    ' + a[1] + '   ' + a[2])
+

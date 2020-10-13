@@ -37,13 +37,13 @@ test = [
 ]
 
 modes = [
-['Enter VLAN number:'],
-['Enter allowed VLANs:']
+'Enter VLAN number:',
+'Enter allowed VLANs:'
 ]
 
 mode = input('Enter interface mode (access/trunk): ')
 interface = input('Enter interface and number: ')
 mode = mode.count('trunk')
-vlans = input (' '.join(modes[mode]))
+vlans = input (modes[mode])
 print('interface {}'.format(interface))
 print('\n'.join(test[mode]).format(vlans))

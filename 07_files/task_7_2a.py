@@ -13,3 +13,12 @@
 """
 
 ignore = ["duplex", "alias", "Current configuration"]
+
+from sys import argv
+file = argv[1]
+with open(file, 'r') as file:
+    for line in file:
+        if line.find('!') == -1 and line.find(ignore[0]) == -1 and line.find(ignore[1]) == -1 and line.find(ignore[2]) == -1:
+            print(line)
+
+# цикл

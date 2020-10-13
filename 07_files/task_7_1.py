@@ -17,7 +17,7 @@ Outbound Interface    FastEthernet0/0
 file = open('/home/std/pyneng-examples-exercises/exercises/07_files/ospf.txt')
 for line in file:
     cont=line.split(' ') 
-    print('\n'' Prefix','\t\t', cont[8],'\n','AD/Metric', '\t\t', cont[9], '\n',
-    'Next-Hop', '\t\t', cont[10], '\n', 'Last update', '\t\t', cont[11], '\n',
-    'Outbound Interface', '\t', cont[12], '\n')
+    print('\n'' Prefix','\t\t', cont[8],'\n','AD/Metric', '\t\t', cont[9][1:6], '\n',
+    'Next-Hop', '\t\t', cont[10], '\n', 'Last update', '\t\t', cont[11][:-1], '\n',
+    'Outbound Interface', '\t', cont[12][:-1], '\n')
 

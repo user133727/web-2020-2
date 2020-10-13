@@ -14,25 +14,25 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
 
-test = input('Enter ip (example: 10.1.1.0): ')
-ip = test.strip().split('.')
-q = int(ip[0])
-w = int(ip[1])
-e = int(ip[2])
-r = int(ip[3])
+ip = input('Enter IP (example 10.0.1.1): ')
+ip = ip.strip().split('.')
+oktet1 = int(ip[0])
+oktet2 = int(ip[1])
+oktet3 = int(ip[2])
+oktet4 = int(ip[3])
 
 unicast = list(range(1, 224))
 multicast = list(range(224, 240))
 broadcast = [255,255,255,255]
 unassigned = [0,0,0,0]
 
-if q in unicast:
-    print('\n','unicast','\n')
-elif q in multicast:
-    print('\n','multicast','\n')
-elif q in broadcast and w in broadcast and e in broadcast and r in broadcast:
-    print('\n','broadcast','\n')
-elif q in unassigned and w in unassigned and e in unassigned and r in unassigned:
-    print('\n','unassigned','\n')
+if oktet1 in unicast:
+    print('This is unicast IP')
+elif oktet1 in multicast:
+    print('This is multicast')
+elif oktet1 in broadcast and oktet2 in broadcast and oktet3 in broadcast and oktet4 in broadcast:
+    print('This is broadcast IP')
+elif oktet1  in unassigned and oktet2 in unassigned and oktet3 in unassigned and oktet4 in unassigned:
+    print('This is unassigned IP')
 else:
-    print('\n','unused','\n')
+    print('This is unused IP')
