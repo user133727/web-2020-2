@@ -18,7 +18,13 @@ from sys import argv
 file = argv[1]
 with open(file, 'r') as file:
     for line in file:
-        if line.find('!') == -1 and line.find(ignore[0]) == -1 and line.find(ignore[1]) == -1 and line.find(ignore[2]) == -1:
-            print(line)
+        if not line.startswith("!"):
+            ignore_line = False
+            for word in ignore:
+                if line.find(word) > -1:
+                    ignore_line = True
+                    break
+            if not ignore_line:
+                print(line.rstrip())
 
-# цикл
+# через цикл
