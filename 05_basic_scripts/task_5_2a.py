@@ -46,7 +46,7 @@ ip = ip.split('.')
 oktet1 = int(ip[0])
 oktet2 = int(ip[1])
 oktet3 = int(ip[2])
-oktet4 = 0 * (int(ip[3]))
+oktet4 = int(ip[3])
 
 ip_template = """
 Network:
@@ -64,6 +64,11 @@ moktet2 = int(maskbit[8:16], 2)
 moktet3 = int(maskbit[16:24], 2)
 moktet4 = int(maskbit[24:32], 2)
 
+oktet1 = oktet1 & moktet1
+oktet2 = oktet2 & moktet2
+oktet3 = oktet3 & moktet3
+oktet4 = oktet4 & moktet4
+
 mask_template = """
 Mask:
 {4:<}
@@ -74,3 +79,4 @@ Mask:
 print(ip_template.format(oktet1, oktet2, oktet3, oktet4))
 print(mask_template.format(moktet1, moktet2, moktet3, moktet4, mask))
 
+# изменить метод перевода
