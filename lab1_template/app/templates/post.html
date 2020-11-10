@@ -1,0 +1,35 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.author }}, {{ post.date.strftime('%d.%m.%Y') }}</p>
+    <img class="card-img-top" src="{{ url_for('static', filename='images/' ~ post.image_filename) }}" alt="Card image cap">
+        <p class="text">{{ post.text }}</p>
+        <form>
+            <div class="form-group my-3">
+              <label for="comment">Your Comment</label>
+              <textarea name="comment" class="form-control" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send</button>
+        </form>
+    {% for comm in post.comments %}
+    <div class="media my-3">
+        <img class="mr-3" src="{{ url_for('static', filename='images/' ~ 'test1.jpg') }}" width='30' alt="Generic placeholder image">
+        <div class="media-body">
+          <h5 class="mt-0">{{comm.author}}</h5>
+            {{comm.text}} 
+            {% for rep in comm.replies %}
+          <div class="media mt-3">
+            <a class="pr-3" href="#">
+              <img src="{{ url_for('static', filename='images/' ~ 'test1.jpg') }}" width='30'alt="Generic placeholder image">
+            </a>
+            <div class="media-body">
+              <h5 class="mt-0">{{rep.author}}</h5>
+              {{rep.text}}
+            </div>
+          </div>
+           {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}
