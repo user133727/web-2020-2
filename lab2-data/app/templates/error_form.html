@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {{ request.url }}
+
+    <h1 class="my-5">Проверка номера телефона</h1>
+
+    <form method="POST">
+        <div class="form-group">
+            <label for="number">Номер телефона</label>
+            <input type="text" id="error_f" name="error_f" class="form-control" value="">
+        </div>
+        <div class="form-group text-center">
+            <input type="submit" value="Отправить" class="btn btn-primary">
+        </div>
+    </form>
+
+{% endblock %}

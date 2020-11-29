@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ru" class="h-100">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    <title>
+          Лабораторная работа № 2
+    </title>
+</head>
+
+<body class="h-100">
+
+    <div class="h-100 d-flex flex-column">
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="{{ url_for('index') }}">Лабораторная работа № 2</a>
+                <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse"
+                    data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                    aria-label="Toggle navigation"></button>
+                <div class="collapse navbar-collapse" id="collapsibleNavId">
+                    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                        <li class="nav-item {% if request.endpoint == 'index' %} active {% endif %}">
+                            <a class="nav-link" href="{{ url_for('index') }}">Задание</a>
+                        </li>
+                        <li class="nav-item {% if request.endpoint == 'args' %} active {% endif %}">
+                            <a class="nav-link" href="{{ url_for('args', test1='test2') }}">Параметры URL</a>
+                        </li>
+                        <li class="nav-item {% if request.endpoint == 'headers' %} active {% endif %}">
+                            <a class="nav-link" href="{{ url_for('headers') }}">Заголовки</a>
+                        </li>
+                        <li class="nav-item {% if request.endpoint == 'cookies' %} active {% endif %}">
+                            <a class="nav-link" href="{{ url_for('cookies') }}">Cookies</a>
+                        </li>
+                        <li class="nav-item {% if request.endpoint == 'form' %} active {% endif %}">
+                            <a class="nav-link" href="{{ url_for('form') }}">Параметры формы</a>
+                        </li>
+                        <li class="nav-item {% if request.endpoint == 'error_form' %} active {% endif %}">
+                            <a class="nav-link" href="{{ url_for('error_form') }}">Проверка номера</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    
+        <div class="container my-5">
+            {% block content %}
+              <h1>Содержимое по умолчанию</h1>
+            {% endblock %}
+        </div>
+
+        <footer class='bg-dark d-flex justify-content-center text-white mt-auto'>Ефремов Н. А. (1999) 191-351</footer>
+    </div>
+
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" 
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
