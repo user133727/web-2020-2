@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {{ request.url }}
+
+    <h1 class="my-5">Номер телефона</h1>
+
+    <form method="POST">
+    <div class="form-group">
+        <label for="tel_num">Введите номер телефона</label>
+        <input type="text" name="tel_num" class="form-control {% if error_msg %} is-invalid {% endif %}" value="{{ request.form.get('tel_num') }}">
+        <div class="invalid-feedback">
+            {{ error_msg }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Отправить" class="btn">
+    </div>
+    </form>
+    {% if format_num %}
+        <input type="text" name="format_num" class="form-control" value="{{ format_num }}" disabled>
+    {% endif %}
+
+{% endblock %}
