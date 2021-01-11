@@ -34,19 +34,19 @@ def phone():
     error_msg = ''
     num = request.form.get('tel_num')
     if num != None:
-        if num.find('-') != -1: 
+        if num.find('-''(') != -1: 
             num=num.replace('-','')
-        if num.find('(') != -1: 
+        elif num.find('(') != -1: 
             num=num.replace('(','')
-        if num.find(')') != -1: 
+        elif num.find(')') != -1: 
             num=num.replace(')','') 
-        if num.find('.') != -1: 
+        elif num.find('.') != -1: 
             num=num.replace('.','') 
-        if num.find('+') != -1: 
+        elif num.find('+') != -1: 
             num=num.replace('+','')  
-        if num.find(' ') != -1: 
+        elif num.find(' ') != -1: 
             num=num.replace(' ','')  
-        if num.isdigit():
+        elif num.isdigit():
             if len(num) == 10:
                 format_num = '8-{}-{}-{}-{}'.format(num[0:3], num[3:6], num[6:8], num[8:])
             elif len(num) == 11:
