@@ -26,6 +26,29 @@ def load_roles():
 def index():
     return render_template('index.html')
 
+################## U S E R S ###########################
+
+@app.route('/users')
+def users():
+    cursor = mysql.connection.cursor(named_tuple=True)
+    cursor.execute(
+        'SELECT users.*, roles.name AS role_name FROM users LEFT OUTER JOIN roles on users.role_id = roles.id;')
+    users = cursor.fetchall()
+    cursor.close()
+    return render_template('users/index.html', users=users)
+
+@app.route('/users/<int:user_id>')
+@check_rights('show')
+@login_required
+def show(user_id):
+    cursor = mysql.connection.cursor(named_tuple=True)
+    cursor.execute('SELECT * FROM users Where id = %s;', (user_id,))
+    user = cursor.fetchone()
+    cursor.execute('SELECT * FROM roles Where id = %s;', (user.role_id,))
+    role = cursor.fetchone()
+    cursor.close()
+    return render_template('users/show.html', user=user, role=role)
+
 ################## F I L M S ###########################
 
 @app.route('/films')
@@ -45,7 +68,7 @@ def new_film():
 @app.route('/films/<int:film_id>/show')
 def show_film(film_id):
     cursor = mysql.connection.cursor(named_tuple = True)
-    cursor.execute('SELECT * FROM films WHERE films.id=%s;', (film_id,))
+    cursor.execute('SELECT * FROM films WHERE films.id = %s;', (film_id,))
     films = cursor.fetchone()
     cursor.close()
     return render_template('films/show.html', film=films, roles=load_roles())
@@ -55,7 +78,7 @@ def show_film(film_id):
 @check_rights('edit')
 def edit_film(film_id):
     cursor = mysql.connection.cursor(named_tuple = True)
-    cursor.execute('SELECT * FROM films WHERE films.id=%s;', (film_id,))
+    cursor.execute('SELECT * FROM films WHERE films.id = %s;', (film_id,))
     films = cursor.fetchone()
     cursor.close()
     return render_template('films/edit.html', film=films, roles=load_roles())
@@ -116,8 +139,8 @@ def update_film(film_id):
     time_in_m = request.form.get('time_in_m')
     poster_id = request.form.get('poster_id')
     query = '''
-        UPDATE films SET title=%s, description=%s, type_id=%s, production_year=%s, country=%s,
-                         producer=%s, scenarist=%s, actors=%s, time_in_m=%s, poster_id=%s
+        UPDATE films SET title = %s, description = %s, type_id = %s, production_year = %s, country = %s,
+                         producer = %s, scenarist = %s, actors = %s, time_in_m = %s, poster_id = %s
         WHERE id=%s;
     '''
     cursor = mysql.connection.cursor(named_tuple = True)
@@ -149,33 +172,10 @@ def update_film(film_id):
 def delete_film(film_id):
     with mysql.connection.cursor(named_tuple = True) as cursor:
         try:
-            cursor.execute('DELETE FROM films WHERE id=%s;', (film_id,))
+            cursor.execute('DELETE FROM films WHERE id = %s;', (film_id,))
         except connector.errors.DatabaseError:
             flash('Failed to delete movie!', 'danger')
             return redirect(url_for('films'))
         mysql.connection.commit()
         flash('Movie has been removed!', 'success')  
     return redirect(url_for('films'))      
-
-################## U S E R S ###########################
-
-@app.route('/users')
-def users():
-    cursor = mysql.connection.cursor(named_tuple=True)
-    cursor.execute(
-        'SELECT users.*, roles.name AS role_name FROM users LEFT OUTER JOIN roles on users.role_id = roles.id;')
-    users = cursor.fetchall()
-    cursor.close()
-    return render_template('users/index.html', users=users)
-
-@app.route('/users/<int:user_id>')
-@check_rights('show')
-@login_required
-def show(user_id):
-    cursor = mysql.connection.cursor(named_tuple=True)
-    cursor.execute('SELECT * FROM users Where id = %s;', (user_id,))
-    user = cursor.fetchone()
-    cursor.execute('SELECT * FROM roles Where id = %s;', (user.role_id,))
-    role = cursor.fetchone()
-    cursor.close()
-    return render_template('users/show.html', user=user, role=role)
