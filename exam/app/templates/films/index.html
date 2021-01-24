@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="my-5">List of films</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Production year</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for film in films %}
+    <tr>
+      <td class="film-title">{{ film.title }}</td>
+        <td>{{ film.description }}</td>
+        <td>{{ film.production_year }}</td>
+        <td>
+          <div class="btn-group"> 
+            <a class="btn btn-primary" href="{{ url_for('show_film', film_id=film.id) }}">View</a>
+            {% if current_user.is_authenticated and current_user.can('edit') %}
+            <a class="btn btn-secondary" href="{{ url_for('edit_film', film_id=film.id) }}">Editing</a>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-film-modal" data-url="{{ url_for('delete_film', film_id=film.id) }}">
+              Delete
+            </button>
+            {% endif %}
+          </div>
+        </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% if current_user.is_authenticated and current_user.can('new') %}
+<a class="btn btn-primary" href="{{ url_for('new_film') }}">Add film</a>
+{% endif %}
+
+{% if current_user.is_authenticated and current_user.can('delete') %}
+<div class="modal" tabindex="-1" role="dialog" id="delete-film-modal">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Deleting a movie</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete the movie "<span id="film-title"></span>"?</p>
+        <form action="" method="POST" class="d-none">
+          <input id="delete-btn"  type="submit">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <label for="delete-btn" class="btn btn-danger cursor-pointer">Yes</label>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% endblock %}

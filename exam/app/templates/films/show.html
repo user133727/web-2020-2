@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="my-5">Movie info</h1>
+
+<table class="table mt-3">
+    <tbody>
+        <tr>
+            <td>Title</td>
+            <td>{{ film.title }}</td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td>{{ film.description }}</td>
+        </tr>
+        <tr>
+            <td>Production year</td>
+            <td>{{ film.production_year }}</td>
+        </tr>
+        <tr>
+            <td>Country</td>
+            <td>{{ film.country }}</td>
+        </tr>
+        <tr>
+            <td>Producer</td>
+            <td>{{ film.producer }}</td>
+        </tr>
+        <tr>
+            <td>Scenarist</td>
+            <td>{{ film.scenarist }}</td>
+        </tr>
+        <tr>
+            <td>Actors</td>
+            <td>{{ film.actors }}</td>
+        </tr>
+        <tr>
+            <td>Time (in minutes)</td>
+            <td>{{ film.time_in_m }}</td>
+        </tr>
+    </tbody>
+</table>
+
+{% endblock %}

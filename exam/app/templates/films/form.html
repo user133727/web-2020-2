@@ -1,0 +1,82 @@
+{% macro render_film_form(url, film={}) %}
+
+<form action="{{ url }}" method="POST">
+
+    
+    <div class="form-group row">
+        <label for="title" class="col-form-label col-md-2">Title</label>
+        <div class="col-md-6">
+            <input class="form-control" type="text" name="title" id="title" value="{{ film.title or '' }}">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="description" class="col-form-label col-md-2">Description</label>
+        <div class="col-md-6">
+            <input class="form-control" type="text" name="description" id="description" value="{{ film.description or '' }}">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="type_id" class="col-form-label col-md-2">Type</label>
+        <div class="col-md-6">
+            <input class="form-control" type="text" name="type_id" id="type_id" value="{{ film.type_id or '' }}">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="production_year" class="col-form-label col-md-2">Production year</label>
+        <div class="col-md-6">
+            <input class="form-control" type="text" name="production_year" id="production_year" value="{{ film.production_year or '' }}">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="country" class="col-form-label col-md-2">Country</label>
+        <div class="col-md-6">
+            <input class="form-control" type="text" name="country" id="country" value="{{ film.country or '' }}">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="producer" class="col-form-label col-md-2">Producer</label>
+        <div class="col-md-6">
+            <input class="form-control" type="text" name="producer" id="producer" value="{{ film.producer or '' }}">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="scenarist" class="col-form-label col-md-2">Scenarist</label>
+        <div class="col-md-6">
+            <input class="form-control" type="text" name="scenarist" id="scenarist" value="{{ film.scenarist or '' }}">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="actors" class="col-form-label col-md-2">Actors</label>
+        <div class="col-md-6">
+            <input class="form-control" type="text" name="actors" id="actors" value="{{ film.actors or '' }}">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="time_in_m" class="col-form-label col-md-2">Time (in minutes)</label>
+        <div class="col-md-6">
+            <input class="form-control" type="text" name="time_in_m" id="time_in_m" value="{{ film.time_in_m or '' }}">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="poster_d" class="col-form-label col-md-2">Poster ID</label>
+        <div class="col-md-6">
+            <input class="form-control" type="text" name="poster_id" id="poster_id" value="{{ film.poster_id or '' }}">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <input type="submit" class="btn btn-primary" value="Save">
+    </div>
+
+</form>
+
+{% endmacro %}

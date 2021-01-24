@@ -1,0 +1,10 @@
+* {
+    box-sizing: border-box;
+}
+.avatar {
+    max-width: 100%;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}
