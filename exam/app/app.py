@@ -2,6 +2,7 @@ from flask import Flask, session, render_template, url_for, request, make_respon
 from flask_login import login_required, current_user
 from mysql_db import MySQL
 import mysql.connector as connector
+import math 
 
 app = Flask(__name__)
 application = app
@@ -51,13 +52,26 @@ def show(user_id):
 
 ################## F I L M S ###########################
 
+PER_PAGE = 3
+
 @app.route('/films')
 def films():
+    page = request.args.get('page', 1, type=int)
+    with mysql.connection.cursor(named_tuple = True) as cursor:
+        cursor.execute('SELECT count(*) AS count FROM films;')
+        total_count = cursor.fetchone().count
+    total_pages = math.ceil(total_count/PER_PAGE)
+    pagination_info = {
+        'current_page': page,
+        'total_pages': total_pages,
+        'per_page': PER_PAGE
+    }
+    query = ''' SELECT * FROM films LIMIT %s OFFSET %s; '''
     cursor = mysql.connection.cursor(named_tuple = True)
-    cursor.execute('SELECT * FROM films;')
+    cursor.execute(query, (PER_PAGE, PER_PAGE*(page - 1)))
     films = cursor.fetchall()
     cursor.close()
-    return render_template('films/index.html', films=films)
+    return render_template('films/index.html', films=films, pagination_info=pagination_info)
 
 @app.route('/films/new')
 @login_required
