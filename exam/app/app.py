@@ -25,7 +25,15 @@ def load_roles():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    query = ''' SELECT COUNT(title) AS count_t FROM films; '''
+    cursor = mysql.connection.cursor(named_tuple=True)
+    cursor.execute(query)
+    count_films = cursor.fetchone()
+    query = ''' SELECT COUNT(id) AS count_u FROM users; '''
+    cursor.execute(query)
+    count_users = cursor.fetchone()
+    cursor.close()
+    return render_template('index.html', count_films=count_films, count_users=count_users)
 
 ################## U S E R S ###########################
 
