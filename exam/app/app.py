@@ -84,8 +84,10 @@ def show_film(film_id):
     cursor = mysql.connection.cursor(named_tuple = True)
     cursor.execute('SELECT * FROM films WHERE films.id = %s;', (film_id,))
     films = cursor.fetchone()
+    cursor.execute('SELECT * FROM types WHERE id = %s;', (films.type_id,))
+    types = cursor.fetchone()
     cursor.close()
-    return render_template('films/show.html', film=films, roles=load_roles())
+    return render_template('films/show.html', film=films, types=types, roles=load_roles())
 
 @app.route('/films/<int:film_id>/edit')
 @login_required
@@ -192,4 +194,4 @@ def delete_film(film_id):
             return redirect(url_for('films'))
         mysql.connection.commit()
         flash('Movie has been removed!', 'success')  
-    return redirect(url_for('films'))      
+    return redirect(url_for('films'))

@@ -16,22 +16,22 @@
   <tbody>
     {% for film in films %}
     <tr>
-      <td class="film-title">{{ film.title }}</td>
-        <td>{{ film.description }}</td>
-        <td>{{ film.production_year }}</td>
-        <td>
-          <div class="btn-group"> 
-            <a class="btn btn-primary" href="{{ url_for('show_film', film_id=film.id) }}">View</a>
-            {% if current_user.is_authenticated and current_user.can('edit') %}
-            <a class="btn btn-secondary" href="{{ url_for('edit_film', film_id=film.id) }}">Editing</a>
-            {% if current_user.can('delete') %}
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-film-modal" data-url="{{ url_for('delete_film', film_id=film.id) }}">
-              Delete
-            </button>
-            {% endif %}
-            {% endif %}
-          </div>
-        </td>
+      <td>{{ film.title }}</td>
+      <td>{{ film.description }}</td>
+      <td>{{ film.production_year }}</td>
+      <td>
+        <div class="btn-group"> 
+          <a class="btn btn-primary" href="{{ url_for('show_film', film_id=film.id) }}">View</a>
+          {% if current_user.is_authenticated and current_user.can('edit') %}
+          <a class="btn btn-secondary" href="{{ url_for('edit_film', film_id=film.id) }}">Editing</a>
+          {% if current_user.can('delete') %}
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-film-modal" data-url="{{ url_for('delete_film', film_id=film.id) }}">
+            Delete
+          </button>
+          {% endif %}
+          {% endif %}
+        </div>
+      </td>
     </tr>
     {% endfor %}
   </tbody>
@@ -66,6 +66,7 @@
     </div>
   </div>
 </div>
+
 {% endif %}
 
 {% endblock %}
