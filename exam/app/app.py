@@ -32,8 +32,7 @@ def index():
 @app.route('/users')
 def users():
     cursor = mysql.connection.cursor(named_tuple=True)
-    cursor.execute(
-        'SELECT users.*, roles.name AS role_name FROM users LEFT OUTER JOIN roles on users.role_id = roles.id;')
+    cursor.execute('SELECT users.*, roles.name AS role_name FROM users LEFT OUTER JOIN roles on users.role_id = roles.id;')
     users = cursor.fetchall()
     cursor.close()
     return render_template('users/index.html', users=users)
@@ -57,6 +56,8 @@ PER_PAGE = 3
 @app.route('/films')
 def films():
     page = request.args.get('page', 1, type=int)
+    searchs = request.args.get('search')
+    print(searchs)
     with mysql.connection.cursor(named_tuple = True) as cursor:
         cursor.execute('SELECT count(*) AS count FROM films;')
         total_count = cursor.fetchone().count
@@ -66,7 +67,11 @@ def films():
         'total_pages': total_pages,
         'per_page': PER_PAGE
     }
-    query = ''' SELECT * FROM films LIMIT %s OFFSET %s; '''
+    query = ''
+    if searchs:
+        query = f''' SELECT * FROM films WHERE title LIKE "%{searchs}%" LIMIT %s OFFSET %s; '''
+    else:
+        query = ''' SELECT * FROM films LIMIT %s OFFSET %s; '''
     cursor = mysql.connection.cursor(named_tuple = True)
     cursor.execute(query, (PER_PAGE, PER_PAGE*(page - 1)))
     films = cursor.fetchall()
