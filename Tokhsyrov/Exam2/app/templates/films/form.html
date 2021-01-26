@@ -1,0 +1,74 @@
+{% macro render_films_form(url, films={}) %}
+<form action="{{ url }}" method="POST">
+
+   <div class="form-group row">
+      <!-- <label for="id" class="col-form-label col-md-2"> id</label>
+        <div class="col-md-6">
+            <input class="form-control" type="text" name="id" id="id" value="{{ films.id }}">
+
+        </div> -->
+      
+    </div>
+
+    <div class="form-group row">
+      <label for="name" class="col-form-lable col-md-2">Название фильма</label>
+       <div class="col-md-6">
+          <input class="form-control" type="text" name="name" id="name" value="{{ films.name }}">
+       </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="description" class="col-form-lable col-md-2">Описание</label>
+       <div class="col-md-6">
+          <input class="form-control" type="text" name="description" id="description" value="{{ films.description }}">
+       </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="year" class="col-form-lable col-md-2">Год выпуска</label>
+       <div class="col-md-6">
+          <input class="form-control" type="number " name="year" id="year" value="{{ films.year }}">
+       </div>
+    </div>
+
+
+
+    <div class="form-group row">
+      <label for="country" class="col-form-lable col-md-2">Страна</label>
+       <div class="col-md-6">
+          <input class="form-control" type="text" name="country" id="country" value="{{ films.country }}">
+       </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="director" class="col-form-lable col-md-2">Режисер</label>
+       <div class="col-md-6">
+          <input class="form-control" type="text" name="director" id="director" value="{{ films.director }}">
+       </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="actor" class="col-form-lable col-md-2">Актеры</label>
+       <div class="col-md-6">
+          <input class="form-control" type="text" name="actor" id="actor" value="{{ films.actor }}">
+       </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="duration" class="col-form-lable col-md-2">Продолжительность</label>
+       <div class="col-md-6">
+          <input class="form-control" type="number" name="duration" id="duration" value="{{ films.duration }}">
+       </div>
+    </div>
+    
+
+
+   
+
+
+    <div class="form-group row">
+      <input type="submit" class="btn btn-primary" value="Сохранить">  
+    </div>
+
+</form>
+{% endmacro %}
