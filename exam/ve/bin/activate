@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/std/web-2020-2/exam-t/ve"
+VIRTUAL_ENV="/home/std/web-2020-2/exam/ve"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

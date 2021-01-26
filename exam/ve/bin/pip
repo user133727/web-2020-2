@@ -1,4 +1,4 @@
-#!/home/std/web-2020-2/exam-t/ve/bin/python3
+#!/home/std/web-2020-2/exam/ve/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
