@@ -25,7 +25,7 @@
   <tbody>
     {% for film in films %}
     <tr>
-      <td>{{ film.title }}</td>
+      <td class="film-title">{{ film.title }}</td>
       <td>{{ film.description }}</td>
       <td>{{ film.production_year }}</td>
       <td>
@@ -75,7 +75,6 @@
     </div>
   </div>
 </div>
-
 {% endif %}
 
 {% endblock %}
